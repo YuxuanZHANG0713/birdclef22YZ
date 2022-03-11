@@ -1,4 +1,5 @@
 import warnings
+import torch
 
 #import src.callbacks as clb
 import src.configuration as C
@@ -10,10 +11,13 @@ from catalyst.dl import SupervisedRunner
 from pathlib import Path
 
 if __name__ == "__main__":
+
     warnings.filterwarnings("ignore")
 
-    args = utils.get_parser().parse_args()
-    config = utils.load_config(args.config)
+    # args = utils.get_parser().parse_args()
+
+    CONFIG_PATH = './configs/000_ResNet34.yml'
+    config = utils.load_config(CONFIG_PATH)
 
     global_params = config["globals"]
 
@@ -49,7 +53,7 @@ if __name__ == "__main__":
         # callbacks = clb.get_callbacks(config)
 
         runner = SupervisedRunner(
-            engine=device,
+            # engine=device,
             input_key=global_params["input_key"],
             target_key=global_params["input_target_key"])
         runner.train(
